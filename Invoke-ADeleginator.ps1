@@ -1,14 +1,48 @@
-﻿# ADeleginator
-function Invoke-ADeleginator ($PathToADeleg) {
+﻿<#
+.SYNOPSIS
+A companion tool that uses ADeleg to find insecure trustee and resource delegations in Active Directory.
+
+.DESCRIPTION
+ADeleginator finds insecure Active Directory delegations by
+    1) Running ADeleg.exe and creating a csv report
+    2) Reads the csv report to find common insecure delegations
+    3) Creates a report containing only the insecure delegations
+
+.EXAMPLE
+Invoke-ADeleginator
+
+.EXAMPLE
+Invoke-ADeleginator -PathToADeleg 'C:\Tools\ADeleg.exe'
+
+#>
+function Invoke-ADeleginator {
+    [CmdletBinding()]
+    Param(
+        $PathToADeleg
+    )
+
     # Create ADeleg csv or json report in the current directory
-    function Create-ADelegReport ($PathToADeleg, $ReportName){
+    function Create-ADelegReport{
+        [CmdletBinding()]
+        Param(
+            $PathToADeleg,
+            $ReportName
+        )
+
         try {
             & $PathToADeleg --csv "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
         } catch {}
     }
 
     # find insecure trustee delegations
-    function Find-InsecureTrusteeDelegations ($ADelegReport, $UnsafeTrustees, $UnsafeDelegations){
+    function Find-InsecureTrusteeDelegations{
+        [CmdletBinding()]
+        Param(
+            $ADelegReport,
+            $UnsafeTrustees,
+            $UnsafeDelegations
+        )
+
         foreach ($Entry in $ADelegReport) {
             if ($Entry.Trustee -match $UnsafeTrustees -and $Entry.Category -match "Allow" `
                 -and $Entry.Details -match $UnsafeDelegations) {
@@ -25,7 +59,15 @@ function Invoke-ADeleginator ($PathToADeleg) {
     }
 
     # find insecure resource delegations
-    function Find-InsecureResourceDelegations ($ADelegReport, $UnsafeTrustees, $Tier0Resources, $UnsafeDelegations){
+    function Find-InsecureResourceDelegations {
+        [CmdletBinding()]
+        Param(
+            $ADelegReport, 
+            $UnsafeTrustees, 
+            $Tier0Resources, 
+            $UnsafeDelegations
+        )
+
         foreach ($Entry in $ADelegReport) {
             if ($Entry.Trustee -match $UnsafeTrustees  -and $Entry.Resource -match $Tier0Resources `
                 -and $Entry.Category -match "Allow" -and $Entry.Details -match $UnsafeDelegations) {
