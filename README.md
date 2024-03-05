@@ -1,7 +1,7 @@
 # ADeleginator
 A tool to find insecure trustee and resource delegations in Active Directory
 
-```PowerShell
+```
 ____ ___  ____ _    ____ ____ _ _  _ ____ ___ ____ ____ 
 |__| |  \ |___ |    |___ | __ | |\ | |__|  |  |  | |__/ 
 |  | |__/ |___ |___ |___ |__] | | \| |  |  |  |__| |  \ 
