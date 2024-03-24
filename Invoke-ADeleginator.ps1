@@ -99,11 +99,6 @@ function Invoke-ADeleginator {
 
     #ASCII!
     Write-Host @"
-____ ___  ____ _    ____ ____ _ _  _ ____ ___ ____ ____ 
-|__| |  \ |___ |    |___ | __ | |\ | |__|  |  |  | |__/ 
-|  | |__/ |___ |___ |___ |__] | | \| |  |  |  |__| |  \ 
-                                                        
-by: Spencer Alessi @techspence                     v0.1
 
           Go, go ADeleginator!
 
@@ -155,6 +150,12 @@ by: Spencer Alessi @techspence                     v0.1
       /      \    .: :.     /      \
       '-..___|_..=:`` ``-:=.._|___..-'
 diddle by VK
+
+____ ___  ____ _    ____ ____ _ _  _ ____ ___ ____ ____ 
+|__| |  \ |___ |    |___ | __ | |\ | |__|  |  |  | |__/ 
+|  | |__/ |___ |___ |___ |__] | | \| |  |  |  |__| |  \ 
+                                                        
+by: Spencer Alessi @techspence                     v0.1
 
 "@
 
