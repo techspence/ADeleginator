@@ -18,7 +18,8 @@ Invoke-ADeleginator -PathToADeleg 'C:\Tools\ADeleg.exe'
 function Invoke-ADeleginator {
     [CmdletBinding()]
     Param(
-        $PathToADeleg
+        $PathToADeleg,
+        $Server
     )
 
     # Create ADeleg csv or json report in the current directory
@@ -29,9 +30,15 @@ function Invoke-ADeleginator {
             $ReportName
         )
 
-        try {
-            & $PathToADeleg --csv "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
-        } catch {}
+        if ($Server) {
+            try {
+                & $PathToADeleg --server $Server --csv "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
+            } catch {}
+        } else {
+            try {
+                & $PathToADeleg --csv "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
+            } catch {}
+        }
     }
 
     # find insecure trustee delegations
