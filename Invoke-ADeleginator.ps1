@@ -14,6 +14,9 @@ Invoke-ADeleginator
 .EXAMPLE
 Invoke-ADeleginator -PathToADeleg 'C:\Tools\ADeleg.exe'
 
+.EXAMPLE
+Invoke-ADeleginator -Server dc01.acme.com -PathToADeleg 'C:\Tools\ADeleg.exe'
+
 #>
 function Invoke-ADeleginator {
     [CmdletBinding()]
