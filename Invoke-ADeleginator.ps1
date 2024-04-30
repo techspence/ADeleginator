@@ -103,9 +103,9 @@ function Invoke-ADeleginator {
 
     $CurrentUserGroups = Get-CurrentUserGroups
     if ($CurrentUserGroups -notmatch $Tier0Resources) {
-        $UnsafeTrustees += $CurrentUserGroups
+        $UnsafeTrustees += "|" + $CurrentUserGroups
     }
-    
+
     $PathToADeleg = '.\ADeleg.exe'
     $ReportName = "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
 
