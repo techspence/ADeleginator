@@ -25,6 +25,10 @@ function Invoke-ADeleginator {
         $Server
     )
 
+    function Get-CurrentUserGroups {
+        ([ADSISearcher]"samaccountname=$($env:USERNAME)").Findone().Properties.memberof -replace '^CN=([^,]+).+$','$1'
+    }
+
     # Create ADeleg csv or json report in the current directory
     function Create-ADelegReport{
         [CmdletBinding()]
@@ -97,6 +101,11 @@ function Invoke-ADeleginator {
     $Tier0Resources = 'Account Operators|Administrator|Administrators|AdminSDHolder|Backup Operators|Cryptographic Operators|Distributed COM Users|Domain Admins|Domain Controllers|Domain Controllers (OU)|Domain root object|DnsAdmins|Enterprise Admins|GPO linked to Tier Zero container|krbtgt|Print Operators|RODC computer object|Schema Admins|Server Operators|Users (container)'
     $UnsafeDelegations = 'owns|write all properties|create child objects|delete child objects|Change the owner|add/delete delegations|delete'
 
+    $CurrentUserGroups = Get-CurrentUserGroups
+    if ($CurrentUserGroups -notmatch $Tier0Resources) {
+        $UnsafeTrustees += $CurrentUserGroups
+    }
+    
     $PathToADeleg = '.\ADeleg.exe'
     $ReportName = "ADelegReport_$(Get-Date -Format ddMMyyyy).csv"
 
