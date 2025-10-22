@@ -1,5 +1,5 @@
 # ADeleginator
-A tool to find insecure trustee and resource delegations in Active Directory
+A tool to find insecure trustee and resource delegations in Active Directory. ADeleginator is a wrapper around [ADeleg](https://github.com/mtth-bfft/adeleg/), a tool written by [@mtth-bfft](https://github.com/mtth-bfft).
 
 ```
 ____ ___  ____ _    ____ ____ _ _  _ ____ ___ ____ ____ 
@@ -64,3 +64,6 @@ diddle by VK
 2. Download [ADeleg.exe](https://github.com/mtth-bfft/adeleg/releases) and place it in the same folder as `Invoke-ADeleginator`
 3. Open PowerShell, navigate to the location of `Invoke-ADeleginator.ps1` and dot source it using: `. .\Invoke-ADeleginator.ps1`
 4. Run with: `Invoke-ADeleginator`
+
+# Credits
+Big thanks to @mtth-bfft for his work on [ADeleg](https://github.com/mtth-bfft/adeleg/)! Super awesome tool.
